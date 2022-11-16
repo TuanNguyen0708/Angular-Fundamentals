@@ -20,11 +20,22 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.dataCart)
+    this.getTotal()
+  }
+
+  getTotal() {
     for (let i = 0; i < this.dataCart.length; i++) {
       this.arrTotal.push(this.dataCart[i].amount * this.dataCart[i].price);
     }
     this.total = this.arrTotal.length > 0 ? this.arrTotal.reduce((a: number, b: number) => a + b) : 0;
+  }
+
+  changeAmount(data: any, product: any) {
+    const findCart = this.dataCart.find((item:any) => item.id === product.id)
+    if (findCart) {
+      findCart.amount = Number(data.value)
+      this.getTotal()
+    }
   }
 
   submit() {

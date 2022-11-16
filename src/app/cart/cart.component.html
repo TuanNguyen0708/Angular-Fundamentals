@@ -17,7 +17,7 @@
       <div style="display: flex !important; flex-direction: column !important;">
         <span>{{cart.name}}</span>
         <span style="padding: 10px 0">{{cart.price}}</span>
-        <span style="display: flex; align-items: center; justify-content: center">Amount: <input type="number" [value]="cart.amount" id="typeNumber" class="form-control" style="width: 100px; margin-left: 10px"/></span>
+        <span style="display: flex; align-items: center; justify-content: center">Amount: <input type="number" [value]="cart.amount" id="typeNumber" class="form-control" style="width: 100px; margin-left: 10px" (change)="changeAmount($event.target, cart)"/></span>
       </div>
     </div>
     <h2>Total: {{total}}</h2>
