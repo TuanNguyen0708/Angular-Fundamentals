@@ -24,10 +24,11 @@ export class CartComponent implements OnInit {
   }
 
   getTotal() {
+    this.arrTotal = [];
     for (let i = 0; i < this.dataCart.length; i++) {
       this.arrTotal.push(this.dataCart[i].amount * this.dataCart[i].price);
     }
-    this.total = this.arrTotal.length > 0 ? this.arrTotal.reduce((a: number, b: number) => a + b) : 0;
+    return this.total = this.arrTotal.length > 0 ? this.arrTotal.reduce((a: number, b: number) => a + b) : 0;
   }
 
   changeAmount(data: any, product: any) {
@@ -36,6 +37,7 @@ export class CartComponent implements OnInit {
       findCart.amount = Number(data.value)
       this.getTotal()
     }
+    console.log(this.dataCart)
   }
 
   submit() {
