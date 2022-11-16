@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {ProductListComponent} from "./product-list/product-list.component";
 import {CartComponent} from "./cart/cart.component";
-import {DetailProductComponent} from "./product-list/detail-product/detail-product.component";
+import {DetailProductComponent} from "./detail-product/detail-product.component";
 import {PaymentComponent} from "./payment/payment.component";
 
 const routes: Routes = [

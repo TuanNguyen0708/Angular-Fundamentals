@@ -6,3 +6,8 @@ export interface ProductListModal {
   description: string;
   amount?: number
 }
+
+export interface optionModal {
+  value: number;
+  label: string
+}

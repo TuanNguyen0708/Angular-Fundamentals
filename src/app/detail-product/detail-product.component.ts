@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {ProductListModal} from "../product-list.modal";
+import {ProductListModal} from "../product-list/product-list.modal";
 
 @Component({
   selector: 'detail-product',
@@ -8,9 +8,9 @@ import {ProductListModal} from "../product-list.modal";
 })
 export class DetailProductComponent implements OnInit {
   selectedAmount: number = 1;
-  options = require('../../../assets/option.json');
-  dataProduct = require('../../../assets/data.json');
-  dataCart = require('../../../assets/cart.json');
+  options = require('../../assets/option.json');
+  dataProduct = require('../../assets/data.json');
+  dataCart = require('../../assets/cart.json');
   product!: ProductListModal;
 
   constructor(private activatedRouter: ActivatedRoute) {

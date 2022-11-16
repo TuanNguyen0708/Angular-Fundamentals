@@ -5,9 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {ProductListComponent} from "./product-list/product-list.component";
 import {CartComponent} from "./cart/cart.component";
-import {DetailProductComponent} from "./product-list/detail-product/detail-product.component";
+import {DetailProductComponent} from "./detail-product/detail-product.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PaymentComponent} from "./payment/payment.component";
+import {ProductItemComponent} from "./product-item/product-item.component";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {PaymentComponent} from "./payment/payment.component";
     ProductListComponent,
     CartComponent,
     DetailProductComponent,
-    PaymentComponent
+    PaymentComponent,
+    ProductItemComponent
   ],
   imports: [
     BrowserModule,
