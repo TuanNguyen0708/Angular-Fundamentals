@@ -2,7 +2,7 @@
   <div style="display: flex; flex-direction: column;justify-content: center; align-items: center; width: 100%">
     <h1>My Store</h1>
     <div style="display: flex">
-      <h2 style="padding-right: 10px; border-right: 1px solid #fff">Product List</h2>
+      <h2 style="padding-right: 10px; border-right: 1px solid #fff; cursor: pointer" routerLink="/">Product List</h2>
       <h2 style="padding-left: 10px; cursor: pointer" routerLink="/cart">Card
         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
       </h2>
@@ -12,15 +12,15 @@
 
 <div style="margin-top: 40px; display: flex; justify-content: center" >
   <div style="display: block;">
-    <div style="display: flex !important; margin-bottom: 10px" *ngFor="let cart of carts">
+    <div style="display: flex !important; margin-bottom: 10px" *ngFor="let cart of dataCart">
       <img [src]="cart.url" alt="" style="width: 100px; height: 150px; border-radius: 5px; margin-right: 20px">
       <div style="display: flex !important; flex-direction: column !important;">
         <span>{{cart.name}}</span>
         <span style="padding: 10px 0">{{cart.price}}</span>
-        <span style="display: flex; align-items: center; justify-content: center">Amount: <input type="number" value="3" id="typeNumber" class="form-control" style="width: 100px; margin-left: 10px"/></span>
+        <span style="display: flex; align-items: center; justify-content: center">Amount: <input type="number" [value]="cart.amount" id="typeNumber" class="form-control" style="width: 100px; margin-left: 10px"/></span>
       </div>
     </div>
-    <h2>Total: 4000$</h2>
+    <h2>Total: {{total}}</h2>
   </div>
   <div style="margin-left: 100px">
     <span style="display: flex; flex-direction: column; margin-bottom: 10px">
