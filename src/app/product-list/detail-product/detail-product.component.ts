@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
+import {ProductListModal} from "../product-list.modal";
 
 @Component({
   selector: 'detail-product',
@@ -10,7 +11,7 @@ export class DetailProductComponent implements OnInit {
   options = require('../../../assets/option.json');
   dataProduct = require('../../../assets/data.json');
   dataCart = require('../../../assets/cart.json');
-  product: any;
+  product!: ProductListModal;
 
   constructor(private activatedRouter: ActivatedRoute) {
   }
@@ -24,10 +25,10 @@ export class DetailProductComponent implements OnInit {
       this.selectedAmount = Number(data.value);
   }
 
-  addProduct(data: any) {
+  addProduct(data: ProductListModal) {
     alert('Added to cart!')
     if (this.dataCart.length > 0) {
-      const findCart = this.dataCart.find((item:any) => item.id === data.id)
+      const findCart = this.dataCart.find((item:ProductListModal) => item.id === data.id)
       if (findCart) {
         findCart.amount = findCart.amount + this.selectedAmount
         return this.dataCart

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {ProductListModal} from "./product-list.modal";
 
 @Component({
   selector: 'product-list',
@@ -16,18 +17,18 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {}
 
-  changeAmount(data:any) {
+  changeAmount(data: any) {
     this.selectedAmount = Number(data.value)
   }
 
-  viewDetail(item: any) {
+  viewDetail(item: ProductListModal) {
     this.router.navigate(['/detail-product', item.id]).then()
   }
 
-  addProduct(data: any) {
+  addProduct(data: ProductListModal) {
     alert('Added to cart!')
     if (this.dataCart.length > 0) {
-      const findCart = this.dataCart.find((item:any) => item.id === data.id)
+      const findCart = this.dataCart.find((item:ProductListModal) => item.id === data.id)
       if (findCart) {
          findCart.amount = findCart.amount + this.selectedAmount
           return this.dataCart

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {ProductListModal} from "../product-list/product-list.modal";
 
 @Component({
   selector: 'cart-product',
@@ -31,8 +32,8 @@ export class CartComponent implements OnInit {
     return this.total = this.arrTotal.length > 0 ? this.arrTotal.reduce((a: number, b: number) => a + b) : 0;
   }
 
-  changeAmount(data: any, product: any) {
-    const findCart = this.dataCart.find((item:any) => item.id === product.id)
+  changeAmount(data: any, product: ProductListModal) {
+    const findCart = this.dataCart.find((item:ProductListModal) => item.id === product.id)
     if (findCart) {
       findCart.amount = Number(data.value)
       this.getTotal()
@@ -44,6 +45,14 @@ export class CartComponent implements OnInit {
     localStorage.setItem("total", this.total.toString());
     localStorage.setItem("name", this.submitForm.get('fullName')?.value);
     this.router.navigate(['/payment']).then()
+  }
+
+  delete(id: number) {
+    const product = this.dataCart.find((item: ProductListModal) => item.id === id)
+    const index = this.dataCart.indexOf(product)
+    this.dataCart.splice(index,1)
+    this.getTotal()
+    alert('Delete product success')
   }
 
 }

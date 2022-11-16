@@ -6,7 +6,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class PaymentComponent implements OnInit {
   total: string | null = '';
-  name: string | null = ''
+  name: string | null = '';
+
   ngOnInit() {
     this.total = localStorage.getItem('total');
     this.name = localStorage.getItem('name')
