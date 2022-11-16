@@ -1,27 +1,39 @@
-# AngularFundamentals
+# Product list Store
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.9.
+roduct list Store is web application project by Udacity
+## Getting Started
+## Project Instructions
 
-## Development server
+### Setup
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### npm install
 
-## Code scaffolding
+Installs required dependencies.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### npm start
+OR
+### ng serve --port 4200
 
-## Build
+Runs the app and can be viewed at [http://localhost:4200]
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### ng test
 
-## Running unit tests
+**Tests are not currently setup.**
+Spec files are created for components, but they are not fleshed out, so tests currently don't 'test' anything.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### ng build
 
-## Running end-to-end tests
+Builds the app for production to the `dist` folder.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+#### Project Structure
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- [***] Product list [***] page, which displays the all of available products for the customer to choose and add to cart.
+- [***] Detail Product list [***] page, Show details of the product you choose.
+- [***] Cart [***], which includes all of products that the customer added to cart.
+- [***] Submit form [***], which collects information about the customer (full name, address, credit).
+- [***] Payment [***] page, which shows the info after the customer completes the order process.
+
+- `data.json`. Project fetches product information from this included file to populate the store.
+- `option.json`. Project fetches amount information from this included file to populate the select.
+
