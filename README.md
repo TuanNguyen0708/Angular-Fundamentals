@@ -1,6 +1,6 @@
 # Product list Store
 
-roduct list Store is web application project by Udacity
+Product list Store is web application project by Udacity
 ## Getting Started
 ## Project Instructions
 
