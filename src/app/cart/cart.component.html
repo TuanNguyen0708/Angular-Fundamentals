@@ -22,20 +22,20 @@
     </div>
     <h2>Total: {{total}}</h2>
   </div>
-  <div style="margin-left: 100px">
+  <form style="margin-left: 100px" [formGroup]="submitForm">
     <span style="display: flex; flex-direction: column; margin-bottom: 10px">
-      <span style="margin-bottom: 5px">Full Name</span>
-      <input type="text" id="form12" class="form-control"/>
+      <span style="margin-bottom: 5px" >Full Name</span>
+      <input type="text" id="form12" class="form-control" formControlName="fullName"/>
     </span>
     <span style="display: flex; flex-direction: column; margin-bottom: 10px">
       <span style="margin-bottom: 5px">Address</span>
-      <input type="text" id="form12" class="form-control"/>
+      <input type="text" id="form12" class="form-control"  formControlName="address"/>
     </span>
     <span style="display: flex; flex-direction: column; margin-bottom: 10px">
-      <span style="margin-bottom: 5px">Credit Card Number</span>
-      <input type="text" id="form12" class="form-control"/>
+      <span style="margin-bottom: 5px" >Credit Card Number</span>
+      <input type="number" id="form12" class="form-control" formControlName="creditCard"/>
     </span>
     <div style="margin-bottom: 10px">We'll never share your payment details with anyone else</div>
-    <button type="button" class="btn btn-primary">Submit</button>
-  </div>
+    <button type="button" class="btn btn-primary" [attr.disabled]="submitForm.invalid ? true : null" (click)="submit()">Submit</button>
+  </form>
 </div>
