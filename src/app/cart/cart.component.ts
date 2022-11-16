@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ProductListModal} from "../product-list/product-list.modal";
+import {CartService} from "../service/cart.service";
 
 @Component({
   selector: 'cart-product',
@@ -17,11 +18,15 @@ export class CartComponent implements OnInit {
     creditCard: ['', [Validators.required, Validators.minLength(10)]],
   })
 
-  constructor(private fb: FormBuilder, private router: Router) {
-  }
+  constructor(private fb: FormBuilder, private router: Router, private cartService: CartService) {}
 
   ngOnInit() {
-    this.getTotal()
+    this.getCarts();
+  }
+
+  getCarts() {
+    this.dataCart = this.cartService.listCart;
+    this.getTotal();
   }
 
   getTotal() {
@@ -38,7 +43,6 @@ export class CartComponent implements OnInit {
       findCart.amount = Number(data.value)
       this.getTotal()
     }
-    console.log(this.dataCart)
   }
 
   submit() {

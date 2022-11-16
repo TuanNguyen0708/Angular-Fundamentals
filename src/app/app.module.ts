@@ -9,6 +9,7 @@ import {DetailProductComponent} from "./detail-product/detail-product.component"
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PaymentComponent} from "./payment/payment.component";
 import {ProductItemComponent} from "./product-item/product-item.component";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {ProductItemComponent} from "./product-item/product-item.component";
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductListModal} from "./product-list.modal";
+import {optionModal, ProductListModal} from "./product-list.modal";
+import {ProductService} from "../service/product.service";
+import {CartService} from "../service/cart.service";
 
 @Component({
   selector: 'product-list',
@@ -8,27 +10,31 @@ import {ProductListModal} from "./product-list.modal";
 })
 export class ProductListComponent implements OnInit {
   selectedAmount: number = 1
-  options = require('../../assets/option.json');
-  dataProduct = require('../../assets/data.json');
-  dataCart = require('../../assets/cart.json');
+  options: optionModal[] = []
+  dataProduct: ProductListModal[] = []
 
-  constructor() {}
+  constructor(private productService: ProductService, private cartService: CartService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getProducts();
+    this.getOptions();
+  }
+
+  getProducts() {
+    this.productService.getListProducts().subscribe((data: ProductListModal[]) => {
+      this.dataProduct = data
+    })
+  }
+
+  getOptions() {
+    this.productService.getOptions().subscribe((data: optionModal[]) => {
+      this.options = data
+    })
+  }
 
   addProduct(data: ProductListModal) {
+    this.cartService.addProduct(data, this.selectedAmount);
     alert('Added to cart!')
-    if (this.dataCart.length > 0) {
-      const findCart = this.dataCart.find((item:ProductListModal) => item.id === data.id)
-      if (findCart) {
-         findCart.amount = findCart.amount + this.selectedAmount
-          return this.dataCart
-      } else {
-        return this.dataCart.push({...data, amount: this.selectedAmount})
-      }
-    } else {
-      return this.dataCart.push({...data, amount: this.selectedAmount})
-    }
   }
 
 }
