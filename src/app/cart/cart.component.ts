@@ -13,9 +13,9 @@ export class CartComponent implements OnInit {
   arrTotal: number[] = [];
   total: number = 0;
   submitForm: FormGroup = this.fb.group({
-    fullName: ['', [Validators.required]],
-    address: ['', [Validators.required]],
-    creditCard: ['', [Validators.required, Validators.minLength(10)]],
+    fullName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+    address: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+    creditCard: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]],
   })
 
   constructor(private fb: FormBuilder, private router: Router, private cartService: CartService) {}
@@ -38,17 +38,23 @@ export class CartComponent implements OnInit {
   }
 
   changeAmount(data: any, product: ProductListModal) {
-    const findCart = this.dataCart.find((item:ProductListModal) => item.id === product.id)
+    const amount = Number(data.value)
+    const findCart = this.dataCart.find((item:ProductListModal) => item.id === product.id);
+    const index = this.dataCart.indexOf(findCart)
     if (findCart) {
-      findCart.amount = Number(data.value)
+      findCart.amount = amount
       this.getTotal()
+    }
+    if (amount < 1) {
+      this.dataCart.splice(index,1)
     }
   }
 
   submit() {
-    localStorage.setItem("total", this.total.toString());
-    localStorage.setItem("name", this.submitForm.get('fullName')?.value);
-    this.router.navigate(['/payment']).then()
+    console.log(this.submitForm)
+    // localStorage.setItem("total", this.total.toString());
+    // localStorage.setItem("name", this.submitForm.get('fullName')?.value);
+    // this.router.navigate(['/payment']).then()
   }
 
   delete(id: number) {

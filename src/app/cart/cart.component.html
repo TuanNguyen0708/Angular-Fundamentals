@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<div style="margin-top: 40px; display: flex; justify-content: center" >
+<div style="margin-top: 40px; display: flex; justify-content: center" *ngIf="dataCart.length > 0">
   <div style="display: block;">
     <div style="display: flex !important; margin-bottom: 10px" *ngFor="let cart of dataCart">
       <img [src]="cart.url" alt="" style="width: 100px; height: 150px; border-radius: 5px; margin-right: 20px">
@@ -24,19 +24,59 @@
     <h2>Total: {{total}}</h2>
   </div>
   <form style="margin-left: 100px" [formGroup]="submitForm">
-    <span style="display: flex; flex-direction: column; margin-bottom: 10px">
+    <div style="display: flex; flex-direction: column; margin-bottom: 10px">
       <span style="margin-bottom: 5px" >Full Name</span>
-      <input type="text" id="form12" class="form-control" formControlName="fullName"/>
-    </span>
-    <span style="display: flex; flex-direction: column; margin-bottom: 10px">
+      <input type="text" class="form-control" formControlName="fullName" placeholder="Full Name"/>
+      <div *ngIf="submitForm.controls['fullName'].invalid && (submitForm.controls['fullName'].dirty || submitForm.controls['fullName'].touched)" class="required text-danger">
+        <div *ngIf="submitForm.controls['fullName'].errors?.['required']">
+          Full name is required
+        </div>
+        <div *ngIf="submitForm.controls['fullName'].errors?.['minlength']">
+          Full name must be at least 5 characters long
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; margin-bottom: 10px">
       <span style="margin-bottom: 5px">Address</span>
-      <input type="text" id="form12" class="form-control"  formControlName="address"/>
-    </span>
-    <span style="display: flex; flex-direction: column; margin-bottom: 10px">
+      <input type="text" class="form-control"  formControlName="address" placeholder="Address"/>
+      <div *ngIf="submitForm.controls['address'].invalid && (submitForm.controls['address'].dirty || submitForm.controls['address'].touched)" class="required text-danger">
+        <div *ngIf="submitForm.controls['address'].errors?.['required']">
+          Address is required
+        </div>
+        <div *ngIf="submitForm.controls['address'].errors?.['minlength']">
+          Address must be at least 5 characters long
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; margin-bottom: 10px">
       <span style="margin-bottom: 5px" >Credit Card Number</span>
-      <input type="number" id="form12" class="form-control" formControlName="creditCard"/>
-    </span>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="creditCard"
+        [min]="1000000000000000"
+        [max]="9999999999999999"
+        inputmode="numeric"
+        placeholder="XXXX-XXXX-XXXX-XXXX"
+        pattern="^\d+$"/>
+      <div *ngIf="submitForm.controls['creditCard'].invalid && (submitForm.controls['creditCard'].dirty || submitForm.controls['creditCard'].touched)" class="required text-danger">
+        <div *ngIf="submitForm.controls['creditCard'].errors?.['required']">
+          Credit card is required
+        </div>
+        <div *ngIf="submitForm.controls['creditCard'].errors?.['minlength']">
+          Credit card must be at least 16 characters long
+        </div>
+        <div *ngIf="submitForm.controls['creditCard'].errors?.['maxlength']">
+          Credit card must be up to 16 characters long
+        </div>
+      </div>
+    </div>
     <div style="margin-bottom: 10px">We'll never share your payment details with anyone else</div>
     <button type="button" class="btn btn-primary" [attr.disabled]="submitForm.invalid ? true : null" (click)="submit()">Submit</button>
   </form>
+</div>
+
+<div *ngIf="dataCart.length === 0" style="margin-top: 40px; display: flex; justify-content: center; flex-direction: column; align-items: center">
+   <h1 style="color: red">No product in my cart!</h1>
+  <button style="width: 200px; margin-top: 20px" type="button" class="btn btn-primary" routerLink="/">Back to product list</button>
 </div>
