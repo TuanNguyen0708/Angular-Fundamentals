@@ -23,29 +23,21 @@
     </div>
     <h2>Total: {{total}}</h2>
   </div>
-  <form style="margin-left: 100px" [formGroup]="submitForm">
+  <form style="margin-left: 100px" #frmInfo = "ngForm" (ngSubmit)="submit(frmInfo.value)">
     <div style="display: flex; flex-direction: column; margin-bottom: 10px">
       <span style="margin-bottom: 5px" >Full Name</span>
-      <input type="text" class="form-control" formControlName="fullName" placeholder="Full Name"/>
-      <div *ngIf="submitForm.controls['fullName'].invalid && (submitForm.controls['fullName'].dirty || submitForm.controls['fullName'].touched)" class="required text-danger">
-        <div *ngIf="submitForm.controls['fullName'].errors?.['required']">
-          Full name is required
-        </div>
-        <div *ngIf="submitForm.controls['fullName'].errors?.['minlength']">
-          Full name must be at least 5 characters long
-        </div>
+      <input type="text" class="form-control" minlength="6" maxlength="32" #name="ngModel" name="fullName" ngModel required [(ngModel)] = "fullName" placeholder="Full Name"/>
+      <div *ngIf = "(name.touched || name.dirty) && name.errors" >
+        <p *ngIf="name.errors?.['required']" class="text-danger">Full name is required</p>
+        <p *ngIf = "name.errors?.['minlength'] || name.errors?.['maxlength']" class="text-danger">Full name from 6 - 32 character</p>
       </div>
     </div>
     <div style="display: flex; flex-direction: column; margin-bottom: 10px">
       <span style="margin-bottom: 5px">Address</span>
-      <input type="text" class="form-control"  formControlName="address" placeholder="Address"/>
-      <div *ngIf="submitForm.controls['address'].invalid && (submitForm.controls['address'].dirty || submitForm.controls['address'].touched)" class="required text-danger">
-        <div *ngIf="submitForm.controls['address'].errors?.['required']">
-          Address is required
-        </div>
-        <div *ngIf="submitForm.controls['address'].errors?.['minlength']">
-          Address must be at least 5 characters long
-        </div>
+      <input type="text" class="form-control" minlength="6" maxlength="250" #add="ngModel" name="address" ngModel required [(ngModel)] = "address" placeholder="Address"/>
+      <div *ngIf = "(add.touched || add.dirty) && add.errors" >
+        <p *ngIf="add.errors?.['required']" class="text-danger">Address is required</p>
+        <p *ngIf = "add.errors?.['minlength'] || add.errors?.['maxlength']" class="text-danger">Address from 6 - 250 character</p>
       </div>
     </div>
     <div style="display: flex; flex-direction: column; margin-bottom: 10px">
@@ -53,24 +45,20 @@
       <input
         type="number"
         class="form-control"
-        formControlName="creditCard"
         [min]="1000000000000000"
         [max]="9999999999999999"
         inputmode="numeric"
         placeholder="XXXX-XXXX-XXXX-XXXX"
         pattern="^\d+$"
+        minlength="16" maxlength="16" #card="ngModel" name="creditCard" ngModel required [(ngModel)] = "creditCard"
       />
-      <div *ngIf="submitForm.controls['creditCard'].invalid && (submitForm.controls['creditCard'].dirty || submitForm.controls['creditCard'].touched)" class="required text-danger">
-        <div *ngIf="submitForm.controls['creditCard'].errors?.['required']">
-          Credit card is required
-        </div>
-        <div *ngIf="submitForm.controls['creditCard'].errors?.['min']?.actual && submitForm.controls['creditCard'].errors?.['min']?.actual !== 16">
-          Credit card must be at least 16 characters long
-        </div>
+      <div *ngIf = "(card.touched || card.dirty) && card.errors" >
+        <p *ngIf=  "card.errors?.['required']"  class="text-danger">Credit is required</p>
+        <p *ngIf = "card.errors?.['min'] || card.errors?.['max']" class="text-danger">Credit card must be at least 16 characters long</p>
       </div>
     </div>
     <div style="margin-bottom: 10px">We'll never share your payment details with anyone else</div>
-    <button type="button" class="btn btn-primary" [attr.disabled]="submitForm.invalid ? true : null" (click)="submit()">Submit</button>
+    <button type="button" class="btn btn-primary" [disabled] = "frmInfo.invalid || frmInfo.submitted" type='submit'>Submit</button>
   </form>
 </div>
 
