@@ -13,8 +13,8 @@ export class CartComponent implements OnInit {
   arrTotal: number[] = [];
   total: number = 0;
   submitForm: FormGroup = this.fb.group({
-    fullName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-    address: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+    fullName: ['', [Validators.required, Validators.minLength(5)]],
+    address: ['', [Validators.required, Validators.minLength(5)]],
     creditCard: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]],
   })
 
