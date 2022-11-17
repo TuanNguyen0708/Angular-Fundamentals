@@ -17,7 +17,7 @@
       <div style="display: flex !important; flex-direction: column !important;">
         <span>{{cart.name}}</span>
         <span style="padding: 10px 0">{{cart.price}}</span>
-        <span style="display: flex; align-items: center; justify-content: center">Amount: <input type="number" [value]="cart.amount" id="typeNumber" class="form-control" style="width: 100px; margin-left: 10px" (change)="changeAmount($event.target, cart)"/></span>
+        <span style="display: flex; align-items: center; justify-content: center">Amount: <input type="number" [min]="1" [value]="cart.amount" id="typeNumber" oninput="validity.valid||(value='');" class="form-control" style="width: 100px; margin-left: 10px" (change)="changeAmount($event.target, cart)"/></span>
         <button style="margin-top: 10px; width: 100px" type="button" class="btn btn-danger" (click)="delete(cart.id)">Delete</button>
       </div>
     </div>
@@ -58,16 +58,14 @@
         [max]="9999999999999999"
         inputmode="numeric"
         placeholder="XXXX-XXXX-XXXX-XXXX"
-        pattern="^\d+$"/>
+        pattern="^\d+$"
+      />
       <div *ngIf="submitForm.controls['creditCard'].invalid && (submitForm.controls['creditCard'].dirty || submitForm.controls['creditCard'].touched)" class="required text-danger">
         <div *ngIf="submitForm.controls['creditCard'].errors?.['required']">
           Credit card is required
         </div>
-        <div *ngIf="submitForm.controls['creditCard'].errors?.['minlength']">
+        <div *ngIf="submitForm.controls['creditCard'].errors?.['min']?.actual && submitForm.controls['creditCard'].errors?.['min']?.actual !== 16">
           Credit card must be at least 16 characters long
-        </div>
-        <div *ngIf="submitForm.controls['creditCard'].errors?.['maxlength']">
-          Credit card must be up to 16 characters long
         </div>
       </div>
     </div>
