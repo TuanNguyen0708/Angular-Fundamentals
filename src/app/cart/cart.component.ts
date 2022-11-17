@@ -56,8 +56,15 @@ export class CartComponent implements OnInit {
   }
 
   changeName(data: string) {
-    console.log(data)
     this.fullName = data
+  }
+
+  changeAddress(data: string) {
+    this.address = data
+  }
+
+  changeCard(data: string) {
+    this.creditCard = data
   }
 
   submit(data: NgForm) {

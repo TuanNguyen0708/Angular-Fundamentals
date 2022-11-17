@@ -26,7 +26,7 @@
   <form style="margin-left: 100px" #frmInfo = "ngForm" (ngSubmit)="submit(frmInfo.value)">
     <div style="display: flex; flex-direction: column; margin-bottom: 10px">
       <span style="margin-bottom: 5px" >Full Name</span>
-      <input type="text" class="form-control" minlength="6" maxlength="32" #name="ngModel" name="fullName" ngModel required [(ngModel)] = "fullName" placeholder="Full Name"/>
+      <input type="text" class="form-control" minlength="6" maxlength="32" #name="ngModel" name="fullName" ngModel required [ngModel] = "fullName" (ngModelChange)="changeName($event)" placeholder="Full Name"/>
       <div *ngIf = "(name.touched || name.dirty) && name.errors" >
         <p *ngIf="name.errors?.['required']" class="text-danger">Full name is required</p>
         <p *ngIf = "name.errors?.['minlength'] || name.errors?.['maxlength']" class="text-danger">Full name from 6 - 32 character</p>
@@ -34,7 +34,7 @@
     </div>
     <div style="display: flex; flex-direction: column; margin-bottom: 10px">
       <span style="margin-bottom: 5px">Address</span>
-      <input type="text" class="form-control" minlength="6" maxlength="250" #add="ngModel" name="address" ngModel required [(ngModel)] = "address" placeholder="Address"/>
+      <input type="text" class="form-control" minlength="6" maxlength="250" #add="ngModel" name="address" ngModel required [ngModel] = "address" (ngModelChange)="changeAddress($event)" placeholder="Address"/>
       <div *ngIf = "(add.touched || add.dirty) && add.errors" >
         <p *ngIf="add.errors?.['required']" class="text-danger">Address is required</p>
         <p *ngIf = "add.errors?.['minlength'] || add.errors?.['maxlength']" class="text-danger">Address from 6 - 250 character</p>
@@ -49,8 +49,13 @@
         [max]="9999999999999999"
         inputmode="numeric"
         placeholder="XXXX-XXXX-XXXX-XXXX"
+        (ngModelChange)="changeCard($event)"
         pattern="^\d+$"
-        minlength="16" maxlength="16" #card="ngModel" name="creditCard" ngModel required [(ngModel)] = "creditCard"
+        minlength="16"
+        maxlength="16"
+        #card="ngModel"
+        name="creditCard"
+        ngModel required [ngModel] = "creditCard"
       />
       <div *ngIf = "(card.touched || card.dirty) && card.errors" >
         <p *ngIf=  "card.errors?.['required']"  class="text-danger">Credit is required</p>
